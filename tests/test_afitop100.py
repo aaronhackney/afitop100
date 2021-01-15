@@ -26,4 +26,4 @@ class TestAFITop100(TestCase):
 
     def test_get_film_by_title(self):
         film = self.afitop100.get_film_by_title(FILM_TITLE)
-        self.assertEquals(film.title.lower(), FILM_TITLE.lower())
+        self.assertEqual(film.title.lower(), FILM_TITLE.lower())

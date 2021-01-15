@@ -34,9 +34,3 @@ class Film:
             return True
         except ValueError:
             return False
-
-    def get_rank_movement(self, afi_year_1=1998, afi_year_2=2007) -> int or None:
-        """Return the rank delta from the 1998 list to the 2007 list"""
-        test = getattr(self, f"self.afi_rank_{afi_year_1}")
-        if self.afi_rank_1998 is not None and self.afi_rank_2007 is not None:
-            return self.afi_rank_1998 - self.afi_rank_2007
