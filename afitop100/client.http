@@ -1,8 +1,0 @@
-GET https://sg.media-imdb.com/suggests/a/aa.json HTTP/1.1
-
-###
-GET https://sg.media-imdb.com/suggests/ HTTP/1.1
-
-###
-# action=parse&page=Pet_door&prop=text&formatversion=2 
-GET https://en.wikipedia.org/w/api.php?action=parse&format=json&page=Pet_door&prop=wikitext&formatversion=2 HTTP/1.1
