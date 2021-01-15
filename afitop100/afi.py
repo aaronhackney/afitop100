@@ -1,19 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-from dataclasses import dataclass
+from .film import Film
 from .common.wikipedia import Wikipedia
-
-
-@dataclass
-class Film:
-    """Class to hold film data"""
-
-    title: str
-    release_year: int
-    director: str
-    afi_rank_1998: str
-    afi_rank_2007: str
-    change: str
 
 
 class AFITop100:
@@ -23,14 +11,29 @@ class AFITop100:
         self.wikipedia = Wikipedia()
         self.afi_list = list()
 
-    def get_afi_all_time(self) -> None:
-        """Get the current all time AFI Top 100 movies from wikipedia"""
-        self.scrape_afi_list(self.wikipedia.get_wikipedia_page("AFI's_100_Years...100_Movies", section="2"))
+    def print_afi_list(self, year=2007) -> None:
+        """
+        Print the AFI Top movies of all time list by year
+        """
+        year_list = self.get_afi_list_by_year(year)
+        print(year_list)
 
-    def scrape_afi_list(self, wiki_json: dict) -> None:
+    def get_afi_list_by_year(self, year: int) -> list:
         """
-        Screen scrape the AFI top 100 list from the wikipedia page
+        Given a valid list year, Return a list of Films objects sorted by AFI Ranking (Ascending)
+        Valid list years as of Jan 2021 are 1998 and 2007
         """
+        afi_list_by_year = list()
+        for film in self.afi_list:
+            if film[f"afi_rank_{year}"] is not None:
+                afi_list_by_year.append(film)
+        return sorted(afi_list_by_year, key=lambda k: k[f"afi_rank_{year}"])
+
+    def scrape_afi_list(self, wiki_title="AFI's_100_Years...100_Movies", section="2") -> None:
+        """
+        Screen scrape the AFI top 100 list from the wikipedia page and store the data in this class instance
+        """
+        wiki_json = self.wikipedia.get_wikipedia_page(wiki_title, section=section)
         soup = BeautifulSoup(wiki_json["parse"]["text"], "html.parser")
         table = soup.find("table", attrs={"class": "wikitable"})
         for row in table.findAll("tr"):
@@ -38,11 +41,23 @@ class AFITop100:
             if len(cells) == 6:
                 self.afi_list.append(
                     Film(
-                        cells[0].text.strip(),
-                        int(cells[1].text.strip()),
-                        cells[2].text.strip(),
-                        cells[3].text.strip(),
-                        cells[4].text.strip(),
-                        cells[5].text.strip(),
+                        cells[0].text.strip(),  # film title
+                        int(cells[1].text.strip()),  # year will always be an integer
+                        cells[2].text.strip(),  # director's name
+                        cells[3].text.strip(),  # 1998 rank might be a '-' and not an integer so pass as a str
+                        cells[4].text.strip(),  # 2007 rank might be a '-' and not an integer so pass as a str
                     )
                 )
+
+    def get_rank_movement(self, film, afi_year_1=1998, afi_year_2=2007) -> int or None:
+        """Return the rank delta from year to year"""
+        year_1 = getattr(film, f"afi_rank_{afi_year_1}")
+        year_2 = getattr(film, f"afi_rank_{afi_year_2}")
+        if year_1 is not None and year_2 is not None:
+            return year_1 - year_2
+
+    def get_film_by_title(self, film: str) -> Film:
+        """Return a film object when searching for a fiulm by name (Case insensitive)"""
+        for film_obj in self.afi_list:
+            if film_obj.title.lower() == film.lower():
+                return film_obj
