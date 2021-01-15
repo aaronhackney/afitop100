@@ -1,5 +1,6 @@
 from unittest import TestCase
 from afitop100.afi import AFITop100
+import json
 
 FILM_TITLE = "Citizen Kane"
 
@@ -27,3 +28,7 @@ class TestAFITop100(TestCase):
     def test_get_film_by_title(self):
         film = self.afitop100.get_film_by_title(FILM_TITLE)
         self.assertEqual(film.title.lower(), FILM_TITLE.lower())
+
+    def test_get_top_100_of_all_time_json(self):
+        json_list = json.loads(self.afitop100.get_afi_list_json())
+        self.assertGreater(len(json_list), 99)

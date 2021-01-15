@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from .film import Film
 from .common.wikipedia import Wikipedia
+import json
 
 
 class AFITop100:
@@ -10,13 +11,6 @@ class AFITop100:
     def __init__(self, **kwargs):
         self.wikipedia = Wikipedia()
         self.afi_list = list()
-
-    def print_afi_list(self, year=2007) -> None:
-        """
-        Print the AFI Top movies of all time list by year
-        """
-        year_list = self.get_afi_list_by_year(year)
-        print(year_list)
 
     def get_afi_list_by_year(self, year: int) -> list:
         """
@@ -61,3 +55,7 @@ class AFITop100:
         for film_obj in self.afi_list:
             if film_obj.title.lower() == film.lower():
                 return film_obj
+
+    def get_afi_list_json(self) -> str:
+        """Return a json string representation of the AFI TOP 100 list"""
+        return json.dumps([film.__dict__ for film in self.afi_list])
