@@ -1,9 +1,8 @@
+import json
 import requests
-from bs4 import BeautifulSoup
 from .film import Film
 from .common import wikipedia
-
-import json
+from bs4 import BeautifulSoup
 
 
 class AFITop100:
@@ -42,10 +41,10 @@ class AFITop100:
                     cells[4].text.strip(),  # 2007 rank might be a '-' and not an integer so pass as a str
                     None,
                 )
-                film.rank_delta = self.get_rank_movement(film)
+                film.rank_delta = self.calculate_rank_movement(film)
                 self.afi_list.append(film)
 
-    def get_rank_movement(self, film: Film, afi_year_1=1998, afi_year_2=2007) -> int or None:
+    def calculate_rank_movement(self, film: Film, afi_year_1=1998, afi_year_2=2007) -> int or None:
         """Return the rank_delta in the given film from year to year"""
         year_1 = getattr(film, f"afi_rank_{afi_year_1}")
         year_2 = getattr(film, f"afi_rank_{afi_year_2}")

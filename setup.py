@@ -22,6 +22,7 @@ setuptools.setup(
     name="afitop100",
     version=get_version("afitop100/__init__.py"),
     packages=setuptools.find_packages(),
-    install_requires=["beautifulsoup4", "requests"],
+    install_requires=["beautifulsoup4", "requests", "flask", "uwsgi"],
     license="Creative Commons Attribution-Noncommercial-Share Alike license",
+    entry_points={"console_scripts": ["afitop100 = afitop100.__main__:main"]},
 )
