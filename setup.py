@@ -1,7 +1,6 @@
 import setuptools
 import codecs
 import os
-import re
 
 
 def read(rel_path):
