@@ -34,27 +34,28 @@ class AFITop100:
         for row in table.findAll("tr"):
             cells = row.findAll("td")
             if len(cells) == 6:
-                self.afi_list.append(
-                    Film(
-                        cells[0].text.strip(),  # film title
-                        int(cells[1].text.strip()),  # year will always be an integer
-                        cells[2].text.strip(),  # director's name
-                        cells[3].text.strip(),  # 1998 rank might be a '-' and not an integer so pass as a str
-                        cells[4].text.strip(),  # 2007 rank might be a '-' and not an integer so pass as a str
-                    )
+                film = Film(
+                    cells[0].text.strip(),  # film title
+                    int(cells[1].text.strip()),  # year will always be an integer
+                    cells[2].text.strip(),  # director's name
+                    cells[3].text.strip(),  # 1998 rank might be a '-' and not an integer so pass as a str
+                    cells[4].text.strip(),  # 2007 rank might be a '-' and not an integer so pass as a str
+                    None,
                 )
+                film.rank_delta = self.get_rank_movement(film)
+                self.afi_list.append(film)
 
-    def get_rank_movement(self, film, afi_year_1=1998, afi_year_2=2007) -> int or None:
-        """Return the rank delta from year to year"""
+    def get_rank_movement(self, film: Film, afi_year_1=1998, afi_year_2=2007) -> int or None:
+        """Return the rank_delta in the given film from year to year"""
         year_1 = getattr(film, f"afi_rank_{afi_year_1}")
         year_2 = getattr(film, f"afi_rank_{afi_year_2}")
         if year_1 is not None and year_2 is not None:
             return year_1 - year_2
 
-    def get_film_by_title(self, film: str) -> Film:
+    def get_film_by_title(self, title: str) -> Film or None:
         """Return a film object when searching for a fiulm by name (Case insensitive)"""
         for film_obj in self.afi_list:
-            if film_obj.title.lower() == film.lower():
+            if film_obj.title.lower() == title.lower():
                 return film_obj
 
     def get_afi_list_json(self) -> str:

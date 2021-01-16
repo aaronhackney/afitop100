@@ -11,10 +11,10 @@ class Film:
     director: str
     afi_rank_1998: int
     afi_rank_2007: int
+    rank_delta: int
 
     def __setattr__(self, name, value) -> None:
         """The year-rank is not assured to be an integer, so do some input checking and convert as needed"""
-
         if name == "afi_rank_1998" or name == "afi_rank_2007":
             if self.is_int_str(value):
                 self.__dict__[name] = int(value)

@@ -3,7 +3,7 @@
 
 The [AFI Top 100 movies of all time](https://www.afi.com/afis-100-years-100-movies/) is a movie ranking list by the [American Film Institute](https://www.afi.com/about-afi/).  
 
-This package will scrape the Wikipedia page that contains this listing and make the data avaialble in a structured form.  
+This package will scrape the Wikipedia page via API that contains this listing and make the data avaialble in a structured form.  
 
 As of the writing of this README, there are two lists avaialbe. The list published in 1998 and the list that was updated in 2007. This package will grab both of these lists and provide the following data fields from the film.py dataclass:  
 
@@ -13,9 +13,9 @@ As of the writing of this README, there are two lists avaialbe. The list publish
 - afi_rank_1998
 - afi_rank_2007
 
-See the /sample directory or take a look at the unittests in /test for some examples on how to consume this data.  
+See the /sample directory or take a look at the unittests in /test for some examples on how to consume this package.  
 
-
+---
 *Example:*
 ```
 from afitop100 import AFITop100
