@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from .film import Film
-from .common.wikipedia import Wikipedia
+from .common import wikipedia
+
 import json
 
 
@@ -9,7 +10,7 @@ class AFITop100:
     """Class to obtain the AFI Top 100 Films of all time"""
 
     def __init__(self, **kwargs):
-        self.wikipedia = Wikipedia()
+        self.wikipedia = wikipedia.Wikipedia()
         self.afi_list = list()
 
     def get_afi_list_by_year(self, year: int) -> list:
