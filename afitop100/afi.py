@@ -59,4 +59,4 @@ class AFITop100:
 
     def get_afi_list_json(self) -> str:
         """Return a json string representation of the AFI TOP 100 list"""
-        return json.dumps([film.__dict__ for film in self.afi_list])
+        return json.dumps([film.__dict__ for film in self.afi_list], indent=2)
