@@ -14,9 +14,7 @@ def find_version():
 setuptools.setup(
     name="afitop100",
     version=find_version(),
-    packages=[
-        "afitop100",
-    ],
+    packages=setuptools.find_packages(),
     install_requires=["beautifulsoup4", "requests"],
     license="Creative Commons Attribution-Noncommercial-Share Alike license",
 )
