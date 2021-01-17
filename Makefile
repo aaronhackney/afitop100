@@ -1,5 +1,6 @@
 HOST=127.0.0.1
-TEST_PATH=./tests/
+PACKAGE:=afitop100
+TEST_PATH=./$(PACKAGE)/tests/
 
 .PHONY : clean
 
