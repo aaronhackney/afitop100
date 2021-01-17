@@ -22,7 +22,7 @@ setuptools.setup(
     name="afitop100",
     version=get_version("afitop100/__init__.py"),
     packages=setuptools.find_packages(),
-    install_requires=["beautifulsoup4", "requests", "flask", "uwsgi", "pandas"],
+    install_requires=["beautifulsoup4", "requests", "pandas"],
     license="GNU GENERAL PUBLIC LICENSE https://www.gnu.org/licenses/gpl-3.0.txt",
     entry_points={"console_scripts": ["afitop100 = afitop100.__main__:main"]},
 )
