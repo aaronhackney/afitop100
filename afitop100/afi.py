@@ -1,5 +1,7 @@
+import csv
 import json
 import requests
+import pandas as pd
 from .film import Film
 from .common import wikipedia
 from bs4 import BeautifulSoup
@@ -57,6 +59,17 @@ class AFITop100:
             if film_obj.title.lower() == title.lower():
                 return film_obj
 
-    def get_afi_list_json(self) -> str:
+    def get_afi_list_json(self, year=0) -> str:
         """Return a json string representation of the AFI TOP 100 list"""
-        return json.dumps([film.__dict__ for film in self.afi_list], indent=2)
+        if year == 0:
+            return json.dumps([film.__dict__ for film in self.afi_list], indent=2)
+        else:
+            year_list = self.get_afi_list_by_year(year)
+            return json.dumps([film.__dict__ for film in year_list], indent=2)
+
+    def get_afi_list_csv(self, year=0) -> str:
+        if year == 0:
+            return pd.DataFrame(self.afi_list).to_csv(index=False, float_format="%.f", quoting=csv.QUOTE_ALL)
+        else:
+            year_list = self.get_afi_list_by_year(year)
+            return pd.DataFrame(year_list).to_csv(index=False, float_format="%.f", quoting=csv.QUOTE_ALL)
