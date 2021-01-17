@@ -1,5 +1,11 @@
 # afitop100
-## AFI Top 100
+## AFI Top 100  
+
+**Requirements**  
+Tested under python version 3.8.2+  
+YMMV with older versions
+
+---  
 
 The [AFI Top 100 movies of all time](https://www.afi.com/afis-100-years-100-movies/) is a movie ranking list by the [American Film Institute](https://www.afi.com/about-afi/).  
 
