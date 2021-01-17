@@ -20,7 +20,7 @@ As of the writing of this README, there are two lists avaialbe. The list publish
 - afi_rank_2007: int or None
 - rank_delta: int or None  
   
-Take a look at the unittests in /test for some examples on how to consume the modules in this package and/or see the documentation below.
+Take a look at the unittests in afitop100/test for some examples on how to consume the modules in this package and/or see the documentation below.
   
 ---
 *CLI Usage Example:*  
