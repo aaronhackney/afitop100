@@ -27,7 +27,7 @@ setuptools.setup(
     author="Aaron K. Hackney",
     author_email="aaron_309@yahoo.com",
     url="https://github.com/aaronhackney/afitop100",
-    download_url="https://github.com/aaronhackney/afitop100/archive/v1.0.0.tar.gz",
+    download_url="https://github.com/aaronhackney/afitop100/archive/v1.0.1.tar.gz",
     keywords=["afi", "top 100", "films", "movies", "all time", "american", "film", "institute"],
     install_requires=["beautifulsoup4", "requests", "pandas"],
     entry_points={"console_scripts": ["afitop100 = afitop100.__main__:main"]},
