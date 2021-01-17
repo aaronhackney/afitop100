@@ -18,7 +18,7 @@ class Wikipedia:
         """Given a wikipedia page, return a json represnetation of the page and the section if one is given."""
 
         headers = (
-            {"User-Agent": kwargs["user_agent"]} if kwargs.get("user_agent") else {"User-Agent": "vscode-restclient"}
+            {"User-Agent": kwargs["user_agent"]} if kwargs.get("user_agent") else {"User-Agent": "afitop100-restclient"}
         )
 
         querystring = {"action": "parse", "format": "json", "page": page, "prop": "text", "formatversion": "2"}
