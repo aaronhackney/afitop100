@@ -12,12 +12,26 @@ As of the writing of this README, there are two lists avaialbe. The list publish
 - director: str
 - afi_rank_1998: int or None
 - afi_rank_2007: int or None
-- rank_delta: int or None
-
+- rank_delta: int or None  
+  
 See the /sample directory or take a look at the unittests in /test for some examples on how to consume this package.  
+  
+---
+*CLI Usage Example:*  
+afitop100 *[optional switches]*  
+  
+**Year:**  
+Default: **all** films from **both** 1998 and 2007  
+-y 1998 -> Only return films from the 1998 list  
+-y 2007 -> Only return films from the 2007 list  
+  
+**Output:**  
+Default: json  
+-o json -> return the list as pretty printed json  
+-o csv -> return the list in a csv format  
 
 ---
-*Example:*
+*Library Usage Example:*  
 ```
 from afitop100 import AFITop100
 """
