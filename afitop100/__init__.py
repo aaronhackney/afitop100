@@ -5,6 +5,6 @@
 >>> print(afi.get_afi_list_json())
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from .afi import AFITop100
