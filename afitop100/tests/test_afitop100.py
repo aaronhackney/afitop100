@@ -31,8 +31,12 @@ class TestAFITop100(TestCase):
 
     def test_get_top_100_of_all_time_json(self):
         json_list = json.loads(self.afitop100.get_afi_list_json())
-        self.assertGreater(len(json_list), 99)
+        self.assertGreaterEqual(len(json_list), 99)
 
     def test_get_afi_list_by_year_json(self):
         json_list = json.loads(self.afitop100.get_afi_list_json(year=2007))
-        self.assertEqual(len(json_list), 100)
+        self.assertGreaterEqual(len(json_list), 99)
+
+    def test_get_afi_list_by_year_csv(self):
+        csv_list = self.afitop100.get_afi_list_csv(year=2007).splitlines()
+        self.assertGreaterEqual(len(csv_list), 99)
