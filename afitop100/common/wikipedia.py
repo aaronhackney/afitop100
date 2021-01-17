@@ -22,6 +22,7 @@ class Wikipedia:
         )
 
         querystring = {"action": "parse", "format": "json", "page": page, "prop": "text", "formatversion": "2"}
+
         if kwargs.get("section"):
             querystring["section"] = kwargs["section"]
 
